@@ -17,3 +17,16 @@ body{
     flex-direction: column;
     height: 100vh;
 }
+a img {
+    width: 280px;
+    height: auto;
+    margin-left: 20px;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+      margin:32px;
+}
+input{
+    margin: 25px;
+}
