@@ -17,7 +17,7 @@ body{
     flex-direction: column;
     height: 100vh;
 }
-a img {
+header a img {
     width: 280px;
     height: auto;
     margin-left: 20px;
@@ -46,4 +46,35 @@ input{
         padding: 3px 10px;
     cursor: pointer;
     font-size: var(--font-size);
+}
+main{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+ 
+}
+/* ------->FOOTER------------------------------*/
+.footer-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    padding: 32px 0px 32px 0px;
+    position: relative;
+    margin: 0 auto;
+    gap: 12px;
+    background-color: var(--secondary-color);
+}
+
+.footer-content {
+    color: white;  
+}
+
+footer a img {
+    width: 280px;
+    height: auto;
+    margin-left: 20px;
 }

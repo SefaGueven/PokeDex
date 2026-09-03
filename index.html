@@ -19,11 +19,26 @@
         <p>Find your favourite Pokémon </p>
         <input id="input" type="search" placeholder="...">
         <button class="search-btn" id="search" onclick="searchPokemon()" data-id="search-button">Go!</button>
+        <div id="error-min-3-characters" class=""></div>
+            <p id="error-no-match-found" data-id="not-found" style="display:none" aria-label="error-no-match-found"><b>ERROR:</b><br>No Pokemon found!</p>
     </nav>  
  </header>
- <main>
+ <main data-id="content">
+    <div id="error-massage" class="error-wrapper" aria-label="error-massage">
+    </div>
+
     <h1>PokeDex</h1>
  </main>
     
 </body>
+<footer>
+        <div class="footer-wrapper" aria-label="footer-wrapper">
+            <div class="footer-img-wrapper" aria-label="footer-image-wrapper">
+               <a href="index.html">
+   <img src="image/PokeDex.png" alt="Pokedex-image">
+</a>
+            </div>
+            <span class="footer-content" alt="Sefa Gueven 2026"> © Sefa Gueven 2026</span>
+        </div>
+    </footer>
 </html>
