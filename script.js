@@ -1,6 +1,6 @@
 const BASE_URL = "https://pokeapi.co/api/v2/";
 const LIMIT = 28;
-//  Das sieht nach der Grundstruktur einer kleinen Pokédex-App aus – mit Paginierung (offset), 
+//   Grundstruktur einer  Pokédex-App  – mit Paginierung (offset), 
 //  einer Gesamtliste (pokemonArray), einem aktuellen Anzeige-Index (currentIndex) und
 //  einem separaten Platz für Suchergebnisse (searchedPokemonArray).
 let offset = 0;
@@ -13,3 +13,9 @@ const myDialog =document.getElementById("pokemon-dialog");
 const loadMoreBtn = document.getElementById("loading-more-pokemon");
 const backToStart = document.getElementById("back-to-start-btn");
 const errorMessage = document.getElementById("error-no-match-found");
+
+//Cleanup fdafür,dass die Seite wieder normal ist,sobald man den Dialogfenster schließt.
+myDialog.addEventListener("close",() => {
+    myDialog.classList.remove("opened");
+    document.body.classList.remove("no-scroll");
+});
