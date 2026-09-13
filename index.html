@@ -1,44 +1,54 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <link rel="shortcut icon" href="image/icon/pokeball-favicon.png " type="image/x-icon" />
-    <title>PokeDex</title>
-    <script src="script.js"></script>
-<link rel="stylesheet" href="style.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="image/icon/pokeball-favicon.png " type="image/x-icon" />
+        <title>PokeDex</title>
+        <link rel="stylesheet" href="style.css"> 
 </head>
 <body onload="init()">
-     <header>
-       <nav> <a href="index.html">
-   <img src="image/PokeDex.png" alt="Pokedex-image">
-</a>
-
-</nav>
-    <nav class="navi">
-        <p>Find your favourite Pokémon </p>
-        <input id="input" type="search" placeholder="...">
-        <button class="search-btn" id="search" onclick="searchPokemon()" data-id="search-button">Go!</button>
-        <div id="error-min-3-characters" class=""></div>
+    <header>
+        <div class="headline-and-logo" aria-label="headline-and-logo">
+            <h1 class="pokedex-main-headline" aria-label="headline">POKEDEX</h1>
+            <div class="logo-wrapper" aria-label="logo-wrapper">
+                <img src="image/PokeDex.png" class="pokedex-logo" alt="logo">
+            </div>
+        </div>
+        <section class="search-pokemon-section">
+            <input type="text" class="input-search-pokemon" name="pokemonName" id="pokemonName" data-id="search-input" 
+                aria-label="input-field-search-pokemon" placeholder="Search Pokemon" minlength="3" required>
+            <button class="search-pokemon-btn" onclick="searchPokemon()" data-id="search-button">Search</button>
+            <div id="error-min-3-characters" class=""></div>
             <p id="error-no-match-found" data-id="not-found" style="display:none" aria-label="error-no-match-found"><b>ERROR:</b><br>No Pokemon found!</p>
-    </nav>  
- </header>
- <main data-id="content">
-    <div id="error-massage" class="error-wrapper" aria-label="error-massage">
-    </div>
-
-    <h1>PokeDex</h1>
- </main>
-    
-</body>
-<footer>
+        </section>
+    </header>
+    <main data-id="content">
+        <div id="error-message" class="error-wrapper" aria-label="error-message">  
+        </div>
+        <ul class="pokemon-thumbnails-content" id="pokemon-thumbnails-content" aria-label="pokemon-thumbnails-content">  
+        </ul>
+        <div id="loading-container" class="loading-container" aria-label="loading-container">
+            <img src="" id="loading-spinner" alt="loading spinner" class="loading-spinner"></img>
+        </div>
+        <dialog data-id="dialog" id="pokemon-dialog" closedby="any" aria-label="pokemon-dialog">
+            <div id="pokemon-dialog-content" data-id="overlay-pokemon-name" aria-label="overlay-pokemon-name" class="pokemon-big-card">
+            </div>
+        </dialog>
+        <div id="load-more-section" aria-label="load-more-section">
+            <button data-id="back-to-start-button" id="back-to-start-btn" style="visibility: hidden" class="back-to-start-btn" aria-label="load-more-pokemons-button" onclick="backToStart()">Back to Start</button>
+            <button data-id="load-more-button" id="loading-more-pokemon" class="loading-more-pokemon-btn" aria-label="load-more-pokemons-button" onclick="loadMorePokemons()">Load more Pokemons</button>
+        </div>
+    </main>
+    <footer>
         <div class="footer-wrapper" aria-label="footer-wrapper">
             <div class="footer-img-wrapper" aria-label="footer-image-wrapper">
-               <a href="index.html">
-   <img src="image/PokeDex.png" alt="Pokedex-image">
-</a>
+                <img src="image/PokeDex.png" alt="small-logo" class="footer-img">
             </div>
-            <span class="footer-content" alt="Sefa Gueven 2026"> © Sefa Gueven 2026</span>
+            <span class="footer-content" alt="Sefa Güven 2026"> © Sefa Güven 2026</span>
         </div>
     </footer>
+</body>
+<script src="./script.js"></script>
+<script src="./template.js"></script>
 </html>
