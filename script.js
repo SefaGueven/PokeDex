@@ -63,12 +63,12 @@ async function renderPokemons(pokemonDetails) {
     thumbnailRef.innerHTML += templates.join("");
 
     pokemonDetails.forEach((pokemon, i) =>{
-        renderSmallPokemonCard(pokemon,startIndex + i);
+        renderSmallPokemonCard(pokemon,startIndex + i);     //für jedes Pokémon eine kleine Karte.
         pokemonArray.push(pokemon); 
        });
        await waitForData();
 }
-async function waitForData(){
+async function waitForData(){   //wartet bis alle Bilder vollständig geladen sind 
     const images = document.querySelectorAll(".small-pokemon-sprite-img");
     //Parallel statt sequenziell auf alle Bilder warten.
     await Promise.all(
@@ -76,9 +76,10 @@ async function waitForData(){
     );
     toggleLoadingSpinner();    
     }
+    //     Baut eine kleine Karte, setzt Bild und Typ-Button mit der zu den Typen passenden Farbe.
 function renderSmallPokemonCard(pokemon, cardIndex) {
     const sprite = document.getElementById(`pokemon-sprite-${cardIndex}`);
-    sprite.src = pokemon.sprites.other["official-artwork"].font_default;
+    sprite.src = pokemon.sprites.other["official-artwork"].front_default;
     sprite.style.display="block";
    
     const typeContainer =document.getElementById(`pokemon-type-${cardIndex}`);
