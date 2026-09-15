@@ -38,5 +38,35 @@ async function fetchData(offset) {
         }
     
 }
+function renderError(message) {
+    loadMoreBtn.style.display = "none";
+    errorMessage.innerHTML += showErrorMessage(message);
+}
+// Requests starten
+async function getDetails(responseToJson) {
+    const promises =responseToJson.resuluts.map((pokemon) =>    //Warten, bis alle fertig sind.
+        fetch(pokemon.url).then((res) => res.json()) // wandelt jede Response direkt in JSON um.
+    );
+    const pokemonDetails = await Promise.all(promises);
+    await renderPokemons(pokemonDetails);    //Anzeigen
+    loadMoreBtn.style.display ="flex";  //Button wieder sichtbar.
+}
+
+async function renderPokemons(pokemonDetails) {
+    const thumbnailRef = document.getElementById("pokemon-thumbnails-content");
+    if (offset === 0)thumbnailRef.innerHTML ="";
+
+     // Templates erst als String zusammenbauen und einmalig einfügen,
+    // statt bei jeder Iteration innerHTML += (spart Reflows)
+    const startIndex = pokemonArray.length;
+    const templates = pokemonDetails.map((_, i) =>getTemplateSmallPokemonCard(startIndex +i));
+    thumbnailRef.innerHTML += templates.join("");
+
+    pokemonDetails.forEach((pokemon, i) =>{
+        renderSmallPokemonCard(pokemon,startIndex + i);
+        pokemonArray.push(pokemon); 
+       });
+       await waitForData();
+}
 
 
