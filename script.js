@@ -76,5 +76,19 @@ async function waitForData(){
     );
     toggleLoadingSpinner();    
     }
-
-
+function renderSmallPokemonCard(pokemon, cardIndex) {
+    const sprite = document.getElementById(`pokemon-sprite-${cardIndex}`);
+    sprite.src = pokemon.sprites.other["official-artwork"].font_default;
+    sprite.style.display="block";
+   
+    const typeContainer =document.getElementById(`pokemon-type-${cardIndex}`);
+    typeContainer.innerHTML =pokemon.types.map((type) => showPokemonTypeBtn(type)).join("");
+    pokemon.types.forEach((type) => sprite.classList.add(`pokemon-type-${type.type.name}`));
+    renderPokemonNameID(pokemon, cardIndex);
+}
+function renderPokemonNameID (pokemon,cardIndex){
+    const nameEl = document.getElementById(`pokemon-name-${cardIndex}`);
+    nameEl.textContent = pokemon.name.charAt(0).toUpperCase() +pokemon.name.slice(1);
+    const idEl = document.getElementById(`pokemon-id-${cardIndex}`);
+    idEl.textContent = pokemon.id;
+}
