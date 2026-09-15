@@ -68,5 +68,13 @@ async function renderPokemons(pokemonDetails) {
        });
        await waitForData();
 }
+async function waitForData(){
+    const images = document.querySelectorAll(".small-pokemon-sprite-img");
+    //Parallel statt sequenziell auf alle Bilder warten.
+    await Promise.all(
+        Array.from(images).map((img)=>(img.complete ? Promise.resolve() : img.decode().catch(() =>{})))
+    );
+    toggleLoadingSpinner();    
+    }
 
 
