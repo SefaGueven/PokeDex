@@ -36,7 +36,34 @@ async function fetchData(offset) {
         }catch (error){
             renderError(error.massage);
         }
-    
 }
+// Rendert eine Fehlermeldung in der DOM.
+function renderError(message) {
+    loadMoreBtn.style.display = "none";
+    errorMessage.innerHTML += showErrorMessage(message);
+}
+// nimmt eine Liste von Pokémon-Links und ruft die Details für jedes Pokémon ab, bevor sie gerendert werden.
+async function getDetails(responseToJson) {
+    const promises = responseToJson.results.map((pokemon) =>
+        fetch(pokemon.url).then((res) => res.json())
+    );
+    // Wartet bis alle Promises abgeschlossen sind, bevor die Details gerendert werden.blendet danach den "Mehr Laden"-Button ein, um weitere Pokémon zu laden.
+    const pokemonDetails = await Promise.all(promises);
+    await renderPokemons(pokemonDetails);
+    loadMoreBtn.style.display = "flex";
+    }
+ async function renderPokemons(pokemonDetails) {
+    const thumbnailRef = document.getElementById("pokemon-thumbnails-content");
+    if (offset === 0) thumbnailRef.innerHTML = ""; // Leert den Container, wenn es sich um die erste Seite handelt.  
 
 
+    const startIndex = pokemonArray.length;
+    const templates = pokemonDetails.map((_, i) => getTemplateSmallPokemonCard(startIndex +i));
+    thumbnailRef.innerHtml +=templates.join("");
+
+    pokemonDetails.forEach((pokemon,i) => {
+        renderSmallPokemonCard(pokemon, startIndex + i);
+        pokemonArray.push(pokemon);
+    });
+    await waitforData();
+}
