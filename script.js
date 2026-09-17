@@ -56,7 +56,8 @@ async function getDetails(responseToJson) {
     const thumbnailRef = document.getElementById("pokemon-thumbnails-content");
     if (offset === 0) thumbnailRef.innerHTML = ""; // Leert den Container, wenn es sich um die erste Seite handelt.  
 
-
+    // Templates erst als String zusammenbauen und einmalig einfügen,
+    // statt bei jeder Iteration innerHTML += (spart Reflows)
     const startIndex = pokemonArray.length;
     const templates = pokemonDetails.map((_, i) => getTemplateSmallPokemonCard(startIndex +i));
     thumbnailRef.innerHtml +=templates.join("");
@@ -66,4 +67,28 @@ async function getDetails(responseToJson) {
         pokemonArray.push(pokemon);
     });
     await waitforData();
+}
+async function waitforData() {
+    const images =document.querySelectorAll(".small-pokemon-sprinte-img");  // Parallel statt sequenziell auf alle Bilder warten.
+    await Promise.all(
+        Array.from(images).map((img) =>(img.complete ? Promise.resolve() : img.decode().catch(() =>{})))
+    );
+    toggleLoadingSpinner();
+}
+function renderSmallPokemonCard(pokemon, index) {
+    const sprite = document.getElementById(`pokemon-sprite-${cardIndex}`);
+    sprite.src =pokemon.sprites.other["official-artwork"].front_default;
+    sprite.style.display = "block";
+
+    const typeContainer = document.getElementById(`pokemon-types-${cardIndex}`);
+    typeContainer.innerHTML = pokemon.types.map((type) => showPokemonTypeBtn(type)).join("");
+    pokemon.types.forEach((type) => sprite.classList.add(`pokemon-type-${type.type.name}`)); 
+    renderPokemonNameID(pokemon, cardIndex);
+}
+function renderPokemonNameID(pokemon, cardIndex) {
+    const nameEl = document.getElementById(`pokemon-name-${cardIndex}`);
+    nameEl.textContent = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
+
+    const idEl = document.getElementById(`pokemon-id-${cardIndex}`);
+    idEl.textContent = pokemon.id;
 }
